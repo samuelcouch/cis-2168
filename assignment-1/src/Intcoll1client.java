@@ -16,7 +16,7 @@ public class Intcoll1client
       int value; Scanner keyboard=new Scanner(System.in);
       Intcoll1 P=new Intcoll1(), N=new Intcoll1(), L= new Intcoll1();
       System.out.println("--Intcoll1Client--");
-      
+ 
       System.out.println("Enter an integer to be inserted or 0 to quit:");
       value=keyboard.nextInt();
       while(value != SENTINEL)

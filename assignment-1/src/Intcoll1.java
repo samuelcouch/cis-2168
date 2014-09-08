@@ -61,7 +61,9 @@ public class Intcoll1
                 {
                     int[] t = new int[2*c.length - 1];
                     t[0]=c[0];
-                    for(int k=1; c[k-1] != 0; t[k]=c[k]);
+                    for(int k=1; c[k-1] != 0; k++){
+                        t[k]=c[k];
+                    }
                     c = t;
                 }
                 c[j] = i; c[j + 1] = 0;
