@@ -18,7 +18,7 @@ Methods:
 * boolean equals(Intcoll1 obj)
 
 ### Test Run
-![alt text](/images/intcoll1.png "Intcoll1 Test Run")
+![alt text](images/intcoll1.png "Intcoll1 Test Run")
 
 Test flow:
 1. Check if *input* is equal to the *SENTINEL* 
