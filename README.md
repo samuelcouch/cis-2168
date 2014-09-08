@@ -1,4 +1,4 @@
-Coursework for CIS 2168 at Temple University
-============
+### Coursework for CIS 2168 at Temple University
 
-All code is written with <3 by Sam Couch.
+
+All code is written with ♥ by Sam Couch.
