@@ -21,6 +21,7 @@ Methods:
 ![alt text](images/intcoll1.png "Intcoll1 Test Run")
 
 Test flow:
+
 1. Check if *input* is equal to the *SENTINEL* 
 1. Check if number is positive or negative
   * Positive numbers get placed in collection P
