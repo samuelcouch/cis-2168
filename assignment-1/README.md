@@ -31,11 +31,11 @@ Test flow:
   * Positive numbers get placed in collection P
   * Negative number get placed in collection N
 1. If the number is positive
-  * Call the *insert(**input**)* method on collection P
-  * Call the *insert(int **input**)* method on collection L
+  * Call the *insert( **input** )* method on collection P
+  * Call the *insert( **input** )* method on collection L
 1. If the number is negative
-  * Call the *insert(**-input**)* method on collection N
-  * Call the *omit(**-input**)* method on collection L
+  * Call the *insert( **-input** )* method on collection N
+  * Call the *omit( **-input** )* method on collection L
 1. Output all 3 collections using the *print()* method on each collection
 
 ## Part 2: Intcoll2
