@@ -84,16 +84,18 @@ public class Intcoll3
     // Prints contents of collection to output
     public void print()
     {
-        int pCount = 0;
+        boolean first = true;
         System.out.print("[");
         for(int j=0,k=0; k < how_many && j < c.length; j++)
         {
             if(c[j]) {
-                if(pCount > 0){
-                    System.out.print(", ");
-                    pCount++;
+                if (first){
+                    System.out.print(j);
+                    first = false;
                 }
-                System.out.print(j);
+                else{
+                    System.out.print(", " + j);
+                }
                 k++;
             }
         }
