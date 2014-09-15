@@ -119,12 +119,23 @@ public class Intcoll4
     // Prints contents of collection to output
     public void print()
     {
-        ListNode j = c;
-        System.out.println();
-        while (j != null)
-        {
-            System.out.println(j.info); j = j.link;
+        if(this.how_many > 0){
+            ListNode j = c;
+            int n = 0;
+            System.out.print("[");
+            while (j != null)
+            {
+                if (n != 0){
+                    System.out.print(", ");
+                }
+                System.out.print(j.info); 
+                n++;
+                j = j.link;
+            }
+            System.out.println("]");
         }
+        else
+            System.out.println("[Empty Collection]");
     }
 
     // returns true if both Intcoll4 instances contain

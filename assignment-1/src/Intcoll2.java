@@ -99,7 +99,8 @@ public class Intcoll2
         {
             if(j != 0)
                 System.out.print(", ");
-            System.out.print(c[j]); j++;
+            System.out.print(c[j]); 
+            j++;
         }
         System.out.println("]");
     }
