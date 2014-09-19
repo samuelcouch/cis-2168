@@ -2,6 +2,7 @@
 //**********************************************************
 // FILE: NAME   : intcoll1client.java
 // DESCRIPTION  : This is a client of class Intcoll4.
+// NAME  : Sam Couch - couch@temple.edu
 //**********************************************************
 
 import java.util.*;
