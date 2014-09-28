@@ -72,12 +72,6 @@ public class Intcoll5
         }
         else
             System.out.println("[Empty Collection]");
-//        System.out.println();
-//        while (it.hasNext())
-//        {
-//            System.out.println(it.next());
-//        }
-        
     }
 
     // returns true if both Intcoll5 instances contain
