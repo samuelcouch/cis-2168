@@ -60,11 +60,6 @@ public class Intcoll4 {
             how_many = obj.how_many;
         }
     }
-    
-    /*
-    A.copy(B) -->
-    
-    */
 
     // Returns true if collection contains int i, false if otherwise
     public boolean belongs(int i) {
