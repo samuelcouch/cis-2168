@@ -62,12 +62,11 @@ public class Intcoll5
     // Prints contents of collection to output
     public void print()
     {
-        ListIterator<Integer> it = c.listIterator();
-        System.out.println();
-        if(it.hasNext()){
-            System.out.print("[" + it.next());
-            while(it.hasNext())
-                System.out.print(", " + it.next());
+        ListIterator<Integer> i = c.listIterator();
+        if(i.hasNext()){
+            System.out.print("[" + i.next());
+            while(i.hasNext())
+                System.out.print(", " + i.next());
             System.out.println("]");
         }
         else
