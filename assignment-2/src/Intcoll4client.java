@@ -38,4 +38,3 @@ public class Intcoll4client
         A.print();
     }
 }
-
