@@ -193,12 +193,13 @@ public class Intcoll6
 
    private static void printtree(btNode t, PrintWriter outs)
    {   
-	   if (t!=null)
-	   {
-		   printtree(t.left, outs);
-		   outs.println(t.info);
-		   printtree(t.right, outs);
-	   }
+        if (t!=null)
+        {
+                printtree(t.left, outs);
+                outs.println(t.info);
+                printtree(t.right, outs);
+        }
+        return;
    }
 
    private static void printtree(btNode t)
@@ -209,6 +210,7 @@ public class Intcoll6
           System.out.print(t.info + " ");
           printtree(t.right);
       }
+      return;
    }
 
    private static int toarray(btNode t, int[] a, int i)
