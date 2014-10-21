@@ -28,6 +28,7 @@ public class Intcoll5
         if (this != obj)
         {
             c = new LinkedList<Integer>(obj.c);
+            //uses the LinkedList<E>(LinkedList<E> c) constructor
         }
     }
 

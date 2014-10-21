@@ -74,19 +74,25 @@ public class Intcoll6
 
       while ((p!=null)&&(p.info!=i))
       {
-		  pred=p;
-		  if (p.info>i) p=p.left;
-		  else p=p.right;
+        pred = p;
+        if (p.info>i) 
+            p = p.left;
+        else 
+            p = p.right;
       }
-      if (p==null)
+      if (p == null)
       {
-         howmany++; p=new btNode(i, null, null);
+         howmany++; 
+         p = new btNode(i, null, null);
          if (pred!=null)
          {
-			 if (pred.info>i) pred.left=p;
-			 else pred.right=p;
-		 }
-		 else c=p;
+            if (pred.info>i) 
+                pred.left=p;
+            else 
+                pred.right = p;
+         }
+         else 
+            c = p;
       }
    }
 
@@ -171,7 +177,11 @@ public class Intcoll6
 
    public void print()
    {
-      printtree(c);
+       if (this.c != null){
+           System.out.print("[");
+           printtree(c);
+           System.out.println("]");
+       }
    }
 
    public boolean equals(Intcoll6 obj)
@@ -205,13 +215,14 @@ public class Intcoll6
 
    private static void printtree(btNode t)
    {
-      if (t!=null)
-      {
-          printtree(t.left);
-          System.out.print(t.info + " ");
-          printtree(t.right);
-      }
-      return;
+        if (t!=null)
+        {
+            printtree(t.left);
+            System.out.printf("%d %s", t.info, " ");
+            //System.out.printf("%d; lt: %d, rt: %d\n", t.info, (t.left != null) ? t.left.info : -1, (t.right != null) ? t.right.info : -1);
+            printtree(t.right);
+        }
+        return;
    }
 
    private static int toarray(btNode t, int[] a, int i)
