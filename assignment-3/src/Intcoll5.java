@@ -81,3 +81,4 @@ public class Intcoll5
         return c.equals(obj.c);
     }
 }
+//Extra credit, use clone --

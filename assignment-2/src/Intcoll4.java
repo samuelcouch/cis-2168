@@ -7,7 +7,6 @@
 import java.util.*;
 
 public class Intcoll4 {
-
     //allows us to create nodes within the collection
     private class ListNode {
 
@@ -26,6 +25,7 @@ public class Intcoll4 {
             link = l;
         }
     }
+    
     private ListNode c;
     private int how_many;
 
@@ -46,12 +46,15 @@ public class Intcoll4 {
         if (this != obj) {
             c = null;
             ListNode j = obj.c, k = null, t = new ListNode();
+            //j is used to iterate over c
+            //k is used to rebuild the obj
+            //t is used as a temporary ListNode memory block
             while (j != null) {
                 t.info = j.info;
-                if (k != null) {
-                    k.link = t;
-                } else {
+                if (k == null) {
                     c = t;
+                } else {
+                    k.link = t;
                 }
                 k = t;
                 t = new ListNode();

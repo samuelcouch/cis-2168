@@ -72,7 +72,7 @@ public class Intcoll6
    {
       btNode pred=null, p=c;
 
-      while ((p!=null)&&(p.info!=i))
+      while ((p!=null)&&(!this.belongs(i)))
       {
         pred = p;
         if (p.info>i) 
@@ -123,7 +123,7 @@ public class Intcoll6
                 if(j.right == null) { //check if the i-left has a right branch
                     q = j; //if so, q (i-node) points to j (i-left-node)
                     q.right = p.right; //i-right-node points to the i-right-node
-                               //ie. the left-node shifts upwards
+                  //ie. the left-node shifts upwards
                 } else { //if j.r is not null
                     while(j.right.right != null) //finds the last right-branch
                         j = j.right; 
@@ -218,8 +218,8 @@ public class Intcoll6
         if (t!=null)
         {
             printtree(t.left);
-            System.out.printf("%d %s", t.info, " ");
-            //System.out.printf("%d; lt: %d, rt: %d\n", t.info, (t.left != null) ? t.left.info : -1, (t.right != null) ? t.right.info : -1);
+            //System.out.printf("%d %s", t.info, " ");
+            System.out.printf("%d; lt: %d, rt: %d\n", t.info, (t.left != null) ? t.left.info : -1, (t.right != null) ? t.right.info : -1);
             printtree(t.right);
         }
         return;
