@@ -1,5 +1,5 @@
 //***********************************************************************
-// FILE NAME    : Intcoll6.java
+// FILE NAME    : Stringcoll.java
 // DESCRIPTION  : This file contains the class Intcoll6.
 // NAME: Sam Couch - couch@temple.edu
 //************************************************************************
@@ -149,14 +149,15 @@ public class Stringcoll
 
    public boolean belongs(String i)
    {
-        btNode p = c;
-        while(p!=null && !p.info.equals(i)) {
-            if(p.info.compareTo(i) < 0)
-                p = p.right;
+        btNode pointer = c;
+        
+        while(pointer != null && !pointer.info.equals(i)) {
+            if(pointer.info.compareToIgnoreCase(i) < 0)
+                pointer = pointer.left;
             else
-                p = p.left;
+                pointer = pointer.right;
         }
-        return p!=null;
+        return pointer!=null;
    }
 
    public int get_howmany() {return howmany;}
@@ -223,8 +224,8 @@ public class Stringcoll
         if (t!=null)
         {
             printtree(t.left);
-            System.out.printf("%s %s", t.info, " ");
-            //System.out.printf("%d; lt: %d, rt: %d\n", t.info, (t.left != null) ? t.left.info : -1, (t.right != null) ? t.right.info : -1);
+            //System.out.printf("%s %s", t.info, " ");
+            System.out.printf("%s; lt: %s, rt: %s\n", t.info, (t.left != null) ? t.left.info : -1, (t.right != null) ? t.right.info : -1);
             printtree(t.right);
         }
         return;
