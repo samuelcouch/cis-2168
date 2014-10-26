@@ -31,6 +31,7 @@ public class Stringcoll
        }
    }
    
+   private static int print_count = 0;
    private int howmany;
    private btNode c;
 
@@ -160,7 +161,9 @@ public class Stringcoll
         return pointer!=null;
    }
 
-   public int get_howmany() {return howmany;}
+   public int get_howmany() {
+       return howmany;
+   }
 
    public void print(String outname)
    {
@@ -184,9 +187,10 @@ public class Stringcoll
        }
        if (this.c != null){
            System.out.print("[");
-           printtree(c);
+           printtree(c, this.get_howmany());
            System.out.println("]");
        }
+       print_count = 0;
    }
 
    public boolean equals(Stringcoll obj)
@@ -212,21 +216,25 @@ public class Stringcoll
    {   
         if (t!=null)
         {
-                printtree(t.left, outs);
-                outs.println(t.info);
-                printtree(t.right, outs);
+            printtree(t.left, outs);
+            outs.println(t.info);
+            printtree(t.right, outs);
         }
         return;
    }
 
-   private static void printtree(btNode t)
+   private static void printtree(btNode t, int last)
    {
         if (t!=null)
         {
-            printtree(t.left);
-            //System.out.printf("%s %s", t.info, " ");
-            System.out.printf("%s; lt: %s, rt: %s\n", t.info, (t.left != null) ? t.left.info : -1, (t.right != null) ? t.right.info : -1);
-            printtree(t.right);
+            print_count++;
+            printtree(t.left, last);
+            if(print_count == last)
+                System.out.println(t.info);
+            else 
+                System.out.printf("%s %s", t.info, ", ");
+            //System.out.printf("%s; lt: %s, rt: %s\n", t.info, (t.left != null) ? t.left.info : "NONE", (t.right != null) ? t.right.info : "NONE");
+            printtree(t.right, last);
         }
         return;
    }

@@ -14,7 +14,7 @@ public class StringcollClient
         String input; 
         Scanner keyboard = new Scanner(System.in);
         Stringcoll L = new Stringcoll(), P=new Stringcoll(), N=new Stringcoll();
-        System.out.println("Enter an integer to be inserted or 0 to quit:");
+        System.out.println("Enter a string to be inserted or END to quit:");
         input = keyboard.next();
         while(!input.equals(SENTINEL))
         {
@@ -28,7 +28,7 @@ public class StringcollClient
                 P.insert(input);
                 L.insert(input);
             }
-            System.out.println("Enter next integer to be inserted or END to quit:");
+            System.out.println("Enter next string to be inserted or END to quit:");
             input = keyboard.next();
         }
         System.out.println("All inputs (P):");

@@ -31,6 +31,7 @@ public class Intcoll6
        }
    }
    
+   private static int print_count = 0;
    private int howmany;
    private btNode c;
 
@@ -179,7 +180,7 @@ public class Intcoll6
    {
        if (this.c != null){
            System.out.print("[");
-           printtree(c);
+           printtree(c, this.get_howmany());
            System.out.println("]");
        }
    }
@@ -213,14 +214,17 @@ public class Intcoll6
         return;
    }
 
-   private static void printtree(btNode t)
+   private static void printtree(btNode t, int total)
    {
         if (t!=null)
         {
-            printtree(t.left);
-            //System.out.printf("%d %s", t.info, " ");
-            System.out.printf("%d; lt: %d, rt: %d\n", t.info, (t.left != null) ? t.left.info : -1, (t.right != null) ? t.right.info : -1);
-            printtree(t.right);
+            printtree(t.left, total);
+            if(print_count == total-1)
+                System.out.println(t.info);
+            else
+                System.out.printf("%d %s", t.info, ", ");
+            //System.out.printf("%d; lt: %d, rt: %d\n", t.info, (t.left != null) ? t.left.info : -1, (t.right != null) ? t.right.info : -1);
+            printtree(t.right, total);
         }
         return;
    }
