@@ -48,7 +48,7 @@ public class MergesortTest {
            for(int r = 0; r < kTests; r++){
                mergesort(results[q], 0, results[q].length-1);
                sum += results[q][r];
-               avg = (double)sum/(results[q].length-1);
+               avg = (double)sum/kTests;
                System.out.print(results[q][r] + " ");
            }
            System.out.println();

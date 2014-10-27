@@ -45,7 +45,7 @@ public class InsertionsortTest {
            for(int r = 0; r < kTests; r++){
                insertionsort(results[q]);
                sum += results[q][r];
-               avg = (double)sum/(results[q].length-1);
+               avg = (double)sum/kTests;
                System.out.print(results[q][r] + " ");
            }
            System.out.println();

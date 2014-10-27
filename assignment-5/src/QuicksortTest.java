@@ -45,7 +45,7 @@ public class QuicksortTest {
            for(int r = 0; r < kTests; r++){
                quickSort(results[q], 0, results[q].length-1);
                sum += results[q][r];
-               avg = (double)sum/(results[q].length-1);
+               avg = (double)sum/kTests;
                System.out.print(results[q][r] + " ");
            }
            System.out.println();
@@ -58,12 +58,12 @@ public class QuicksortTest {
     public static int partition(int arr[], int left, int right){
       int i = left, j = right;
       int temp;
-      int pivot = arr[(left + right) / 2];
+      int mid = arr[(left + right) / 2];
      
       while (i <= j) {
-        while (arr[i] < pivot)
+        while (arr[i] < mid)
             i++;
-        while (arr[j] > pivot)
+        while (arr[j] > mid)
               j--;
         if (i <= j) {
             temp = arr[i];
@@ -78,7 +78,6 @@ public class QuicksortTest {
     }
  
     public static void quickSort(int arr[], int left, int right) {
-//        qcount++;
         int index = partition(arr, left, right);
         if (left < index - 1)
             quickSort(arr, left, index - 1);
