@@ -9,13 +9,18 @@ import java.util.*;
 public class MergesortTest {
    static int numcalls = 0;
    static int count = 0, m = 0;
-
+   
    public static void main(String[] args)
    {
+       Scanner keyboard = new Scanner(System.in);
+       int kTests = 10;
+       System.out.println("Enter an integer k times to run the tests: ");
+       kTests = keyboard.nextInt();
+       
        int[] test_cases = {2048, 4096, 8192, 16384};
-       int[][] results = new int[4][10];
+       int[][] results = new int[4][kTests];
        for(int k = 1; k<=4; k++){
-           for(int j = 1; j <= 10; j++){
+           for(int j = 1; j <= kTests; j++){
                numcalls = 0;
                count = 0;
                m = 0;
@@ -36,11 +41,11 @@ public class MergesortTest {
                results[k-1][j-1] = count;
            }
        }
-       for(int q = 0; q<4; q++){
+       for(int q = 0; q < 4; q++){
            System.out.print(test_cases[q] + ": ");
            int sum = 0; 
            double avg = 0.0;
-           for(int r = 0; r<10; r++){
+           for(int r = 0; r < kTests; r++){
                mergesort(results[q], 0, results[q].length-1);
                sum += results[q][r];
                avg = (double)sum/(results[q].length-1);
