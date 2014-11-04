@@ -58,7 +58,7 @@ public class QuicksortTest {
     public static int partition(int arr[], int left, int right){
       int i = left, j = right;
       int temp;
-      int pivot = arr[(left + right) / 2];
+      int pivot = arr[0];
      
       while (i <= j) {
         while (arr[i] < pivot)

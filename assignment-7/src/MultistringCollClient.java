@@ -1,32 +1,29 @@
-//*********************************************************************
-// FILE NAME    : Stringcoll.java
-// DESCRIPTION  : This file contains the class Intcoll6.
+//***********************************************************************
+// FILE NAME    : MultistringCollClient.java
 // NAME: Sam Couch - couch@temple.edu
-//*********************************************************************
+//************************************************************************
 
 import java.util.*;
 
-public class StringcollClient
-{
+public class MultistringCollClient {
+    
     public static final String SENTINEL = "END";
     
     public static void main(String[] args){
         String input; 
         Scanner keyboard = new Scanner(System.in);
-        Stringcoll L = new Stringcoll(), P=new Stringcoll(), N=new Stringcoll();
+        MultistringColl P = new MultistringColl(), N = new MultistringColl();
         System.out.println("Enter a string to be inserted or END to quit:");
         input = keyboard.next();
         while(!input.equals(SENTINEL))
         {
-            //If it's already in the main collection
-            //Insert to N ("negative") and omit from L
             if(P.belongs(input)){
-                N.insert(input);
-                L.omit(input);
+                P.insert(input);
+                N.omit(input);
             }
             else{
                 P.insert(input);
-                L.insert(input);
+                N.insert(input);
             }
             System.out.println("Enter next string to be inserted or END to quit:");
             input = keyboard.next();
@@ -35,7 +32,5 @@ public class StringcollClient
         P.print();
         System.out.println("\n\nOmmited Inputs (N):");
         N.print();
-        System.out.println("\n\nRemaining Inputs (L):");
-        L.print();
     }
 }

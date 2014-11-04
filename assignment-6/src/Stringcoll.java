@@ -5,249 +5,187 @@
 //************************************************************************
 
 import java.util.*;
-import java.io.*;
 
 public class Stringcoll
 {
-    
-   private static class btNode
-   {
-       String info; 
-       btNode left; 
-       btNode right;
+    private static class btNode {
+        public btNode l;
+        public btNode r;
+        public String info;
+        public btNode() {
+            l = null; r = null; info = "";
+        }
+        public btNode(String i, btNode lt, btNode rt) {
+            l = lt; r = rt; info = i;
+        }
+    }
+    private btNode c;
+    private int how_many;
 
-       private btNode(String s, btNode lt, btNode rt)
-       {
-          info = s; 
-          left = lt; 
-          right = rt;  
-       }
+    // Initializes Stringcoll instance which can hold 500 ints
+    public Stringcoll()
+    {
+        c = null;
+        how_many = 0;
+    }
 
-       private btNode()
-       {
-          info = ""; 
-          left = null; 
-          right = null;
-       }
-   }
-   
-   private static int print_count = 0;
-   private int howmany;
-   private btNode c;
+    // Initializes Stringcoll instance which can hold i ints
+    public Stringcoll(int i)
+    {
+        c = null;
+        how_many = 0;
+    }
 
-   public Stringcoll()
-   {
-      c = null;
-      howmany = 0;
-   }
+    // Copys contents of Stringcoll instance named obj to this
+    public void copy(Stringcoll obj)
+    {
+        if (this != obj)
+        {
+            c = btclone(obj.c);
+            how_many = obj.how_many;
+        }
+    }
 
-   public Stringcoll(int i)
-   {
-      c = null;
-      howmany = 0;
-   }
-
-   private static btNode copytree(btNode t)
-   {
-      btNode root=null;
-      if (t!=null)
-      {
-         root=new btNode();
-         root.info=t.info; 
-         root.left=copytree(t.left);
-         root.right=copytree(t.right);
-      }
-      return root;
-   }
-
-   public void copy(Stringcoll obj)
-   {
-      if (this!=obj)
-      {
-          howmany=obj.howmany;
-          c=copytree(obj.c);  
-      }
-   }
-
-   public void insert(String i)
-   { 
-       //Check that i doesn't already exist in the collection...
-       if(this.belongs(i))
-           return;
-       
-       //If it's an empty collection, insert the new item and call it a day
-       if(c == null){
-           c = new btNode(i, null, null);
-           howmany++;
-           return;
-       }
-       //If it's not empty... We've got some work to do
-       btNode pointer = c;
-       btNode prev = pointer;
-       
-       //Use the Java String equals and compateTo methods
-       while(pointer != null && !pointer.info.equals(i)){
-            prev = pointer;
-            if(pointer.info.compareToIgnoreCase(i) < 0)
-                pointer = pointer.right;
+    // Returns true if collection contains int i, false if otherwise
+    public boolean belongs(String i)
+    {
+        btNode p = c;
+        while(p!=null && !p.info.equals(i)) {
+            if(p.info.compareToIgnoreCase(i) < 0)
+                p = p.r;
             else
-                pointer = pointer.left;
+                p = p.l;
+        }
+        return p!=null;
+    }
+
+    // Inserts i into collection. If collection already contains i, function returns
+    //   if collection is filled to capacity, capacity is doubled
+    public void insert(String i)
+    {
+        if(c==null) {
+            c = new btNode(i, null, null);
+            how_many++;
+            return;
         }
 
-        if(pointer == null) {
+        btNode p = c;
+        btNode prev = p;
+        while(p!=null && !p.info.equals(i)) {
+            prev = p;
+            if(p.info.compareToIgnoreCase(i) < 0)
+                p = p.r;
+            else
+                p = p.l;
+        }
+
+        if(p==null) {
             if(prev.info.compareToIgnoreCase(i) < 0)
-                prev.right = new btNode(i, null, null);
+                prev.r = new btNode(i, null, null);
             else
-                prev.left = new btNode(i, null, null);
-            howmany++;
+                prev.l = new btNode(i, null, null);
+            how_many++;
         }
-   }
+    }
 
-// If collection contains i, i will be omitted
+    // If collection contains i, i will be omitted
     public void omit(String i)
     {
-        btNode pointer = c;
+        btNode p = c;
         btNode prev = null;
-        while(pointer!=null && !pointer.info.equals(i)) {
-            prev = pointer;
-            if(pointer.info.compareToIgnoreCase(i) < 0)
-                pointer = pointer.right;
+        while(p!=null && !p.info.equals(i)) {
+            prev = p;
+            if(p.info.compareToIgnoreCase(i) < 0)
+                p = p.r;
             else
-                pointer = pointer.left;
+                p = p.l;
         }
 
-        if(pointer!=null) {
-            btNode q = pointer;
-            if(pointer.right == null)
-                q = pointer.left;
-            else if(pointer.left == null)
-                q = pointer.right;
+        if(p!=null) {
+            btNode q = p;
+            if(p.r==null)
+                q = p.l;
+            else if(p.l==null)
+                q = p.r;
             else {
-                btNode j = pointer.left;
-                if(j.right == null) {
+                btNode j = p.l;
+                if(j.r==null) {
                     q = j;
-                    q.right = pointer.right;
+                    q.r = p.r;
                 } else {
-                    while(j.right.right != null)
-                        j = j.right;
-                    q = j.right;
-                    j.right = q.left;
-                    q.right = pointer.right;
-                    q.left = pointer.left;
+                    while(j.r.r!=null)
+                        j = j.r;
+                    q = j.r;
+                    j.r = q.l;
+                    q.r = p.r;
+                    q.l = p.l;
                 }
             }
 
             if(prev==null)
                 c = q;
-            else if(prev.right == pointer)
-                prev.right = q;
+            else if(prev.r==p)
+                prev.r = q;
             else
-                prev.left = q;
+                prev.l = q;
 
-            howmany--;
+            how_many--;
         }
     }
 
-   public boolean belongs(String i)
-   {
-        btNode pointer = c;
-        
-        while(pointer != null && !pointer.info.equals(i)) {
-            if(pointer.info.compareToIgnoreCase(i) < 0)
-                pointer = pointer.left;
-            else
-                pointer = pointer.right;
+    // Returns amount of ints stored in collection
+    public int get_howmany()
+    {
+        return how_many;
+    }
+
+    // Prints contents of collection to output
+    public void print()
+    {
+        btprint(c);
+    }
+
+    // returns true if both Stringcoll instances contain
+    //   identical int collections
+    public boolean equals(Stringcoll obj)
+    {
+        if(how_many != obj.how_many)
+            return false;
+        String a1[] = new String[how_many];
+        String a2[] = new String[how_many];
+        int i=0;
+        btToArray(c, a1, i);
+        i=0;
+        btToArray(obj.c, a2, i);
+
+        boolean ret = true;
+        for(i=0; ret && i<how_many; i++)
+            ret = (a1[i].equals(a2[i]));
+
+        return ret;
+    }
+
+    private static btNode btclone(btNode b) {
+        if(b==null)
+            return null;
+
+        return new btNode(b.info, btclone(b.l), btclone(b.r));
+    }
+
+    private static int btToArray(btNode b, String[] a, int i) {
+        if(b!=null) {
+            i = btToArray(b.l, a, i);
+            a[i++] = b.info; // i++ returns i before it adds 1, so a[i] == a[i++] != a[++i]
+            i = btToArray(b.r, a, i);
         }
-        return pointer!=null;
-   }
+        return i;
+    }
 
-   public int get_howmany() {
-       return howmany;
-   }
-
-   public void print(String outname)
-   {
-      try
-      {
-	 PrintWriter outs=new PrintWriter(new FileOutputStream(outname));
-         outs.println("The number of integers is "+howmany);
-         outs.println();
-         printtree(c, outs);
-         outs.close();
-      }
-      catch (IOException ex)
-      {
-      }
-   }
-
-   public void print()
-   {
-       if(this.c == null){
-           System.out.println("[EMPTY COLLECTION]");
-       }
-       if (this.c != null){
-           System.out.print("[");
-           printtree(c, this.get_howmany());
-           System.out.println("]");
-       }
-       print_count = 0;
-   }
-
-   public boolean equals(Stringcoll obj)
-   {
-      int j = 0; boolean result  = (howmany==obj.howmany);
-      if (result)
-      { 
-         String[] a=new String[howmany]; 
-         String[] b=new String[howmany];
-         toarray(c, a, 0); 
-         toarray(obj.c, b, 0);
-
-         j=0;
-         while ((result) && (j<howmany))
-         {
-            result=(a[j]==b[j]); j++;
-         }
-      }
-      return result;
-   }
-
-   private static void printtree(btNode t, PrintWriter outs)
-   {   
-        if (t!=null)
-        {
-            printtree(t.left, outs);
-            outs.println(t.info);
-            printtree(t.right, outs);
-        }
-        return;
-   }
-
-   private static void printtree(btNode t, int last)
-   {
-        if (t!=null)
-        {
-            print_count++;
-            printtree(t.left, last);
-            if(print_count == last)
-                System.out.println(t.info);
-            else 
-                System.out.printf("%s %s", t.info, ", ");
-            //System.out.printf("%s; lt: %s, rt: %s\n", t.info, (t.left != null) ? t.left.info : "NONE", (t.right != null) ? t.right.info : "NONE");
-            printtree(t.right, last);
-        }
-        return;
-   }
-
-   private static int toarray(btNode t, String[] a, int i)
-   {
-      int num_nodes=0;
-      if (t!=null)
-      {
-         num_nodes=toarray(t.left, a, i);
-         a[num_nodes+i]=t.info;   
-         num_nodes=num_nodes+1+toarray(t.right, a, num_nodes+i+1);
-      }
-      return num_nodes;
-   } 
+    private static void btprint(btNode b) {
+        if(b==null)
+            return;
+        btprint(b.l);
+        System.out.printf("%s :: L: %s, R: %s\n", b.info, (b.l != null) ? b.l.info : "NULL", (b.r != null) ? b.r.info : "NULL");
+        btprint(b.r);
+    }
 }

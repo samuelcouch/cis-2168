@@ -38,7 +38,7 @@ public class MergesortTest {
                for (i=0; i<a.length; i++) 
                    System.out.println(a[i]);
                System.out.println(test_cases[k-1] + " done!");
-               results[k-1][j-1] = count;
+               results[k-1][j-1] = m;
            }
        }
        for(int q = 0; q < 4; q++){

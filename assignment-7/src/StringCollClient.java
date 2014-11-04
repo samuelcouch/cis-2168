@@ -1,19 +1,21 @@
-//*********************************************************************
-// FILE NAME    : Stringcoll.java
-// DESCRIPTION  : This file contains the class Intcoll6.
+
+import java.util.Scanner;
+
+//***********************************************************************
+// FILE NAME    : StringCollClient.java
 // NAME: Sam Couch - couch@temple.edu
-//*********************************************************************
+//************************************************************************
 
 import java.util.*;
 
-public class StringcollClient
-{
+public class StringCollClient {
+    
     public static final String SENTINEL = "END";
     
     public static void main(String[] args){
         String input; 
         Scanner keyboard = new Scanner(System.in);
-        Stringcoll L = new Stringcoll(), P=new Stringcoll(), N=new Stringcoll();
+        StringColl L = new StringColl(), P=new StringColl(), N=new StringColl();
         System.out.println("Enter a string to be inserted or END to quit:");
         input = keyboard.next();
         while(!input.equals(SENTINEL))
