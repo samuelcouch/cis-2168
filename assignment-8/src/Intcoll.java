@@ -1,56 +1,42 @@
-//***********************************************************************
-// FILE NAME    : MultistringColl.java
-// NAME: Sam Couch - couch@temple.edu
-//************************************************************************
+//*********************************************************************
+// FILE NAME    : Intcoll.java
+// DESCRIPTION  : This file contains the class Intcoll.
+//*********************************************************************
 
-public class MultistringColl {
+import java.util.*;
+
+public class Intcoll
+{
     private static class btNode {
         public btNode l;
         public btNode r;
-        public String info;
-        public int count;
-        
+        public int info;
         public btNode() {
-            l = null; 
-            r = null; 
-            info = "";
-            count = 1;
+            l = null; r = null; info = 0;
         }
-        
-        public btNode(String i, btNode lt, btNode rt){
-            l = lt; 
-            r = rt; 
-            info = i;
-            count = 1;
-        }
-        
-        public btNode(String i, btNode lt, btNode rt, int n) {
-            l = lt; 
-            r = rt; 
-            info = i;
-            count = n;
+        public btNode(int i, btNode lt, btNode rt) {
+            l = lt; r = rt; info = i;
         }
     }
-    
     private btNode c;
     private int how_many;
 
-    // Initializes Stringcoll instance which can hold 500 ints
-    public MultistringColl()
+    // Initializes Intcoll instance which can hold 500 ints
+    public Intcoll()
     {
         c = null;
         how_many = 0;
     }
 
-    // Initializes Stringcoll instance which can hold i ints
-    public MultistringColl(int i)
+    // Initializes Intcoll instance which can hold i ints
+    public Intcoll(int i)
     {
         c = null;
         how_many = 0;
     }
 
-    // Copys contents of Stringcoll instance named obj to this
-    public void copy(MultistringColl obj)
+    // Copys contents of Intcoll instance named obj to this
+    public void copy(Intcoll obj)
     {
         if (this != obj)
         {
@@ -60,11 +46,11 @@ public class MultistringColl {
     }
 
     // Returns true if collection contains int i, false if otherwise
-    public boolean belongs(String i)
+    public boolean belongs(int i)
     {
         btNode p = c;
-        while(p!=null && !p.info.equals(i)) {
-            if(p.info.compareToIgnoreCase(i) < 0)
+        while(p!=null && p.info!=i) {
+            if(p.info < i)
                 p = p.r;
             else
                 p = p.l;
@@ -74,7 +60,7 @@ public class MultistringColl {
 
     // Inserts i into collection. If collection already contains i, function returns
     //   if collection is filled to capacity, capacity is doubled
-    public void insert(String i)
+    public void insert(int i)
     {
         if(c==null) {
             c = new btNode(i, null, null);
@@ -84,72 +70,60 @@ public class MultistringColl {
 
         btNode p = c;
         btNode prev = p;
-        
-        while(p != null && !p.info.equals(i)) {
+        while(p!=null && p.info!=i) {
             prev = p;
-            if(p.info.compareToIgnoreCase(i) < 0)
+            if(p.info < i)
                 p = p.r;
             else
                 p = p.l;
         }
 
         if(p==null) {
-            if(prev.info.compareToIgnoreCase(i) < 0)
+            if(prev.info < i)
                 prev.r = new btNode(i, null, null);
             else
                 prev.l = new btNode(i, null, null);
+            how_many++;
         }
-        
-        else
-            p.count++;
-        
-        how_many++;
     }
 
     // If collection contains i, i will be omitted
-    public void omit(String i)
+    public void omit(int i)
     {
-        btNode n_w_i = c;
+        btNode p = c;
         btNode prev = null;
-        while(n_w_i != null && !n_w_i.info.equals(i)) {
-            prev = n_w_i;
-            if(n_w_i.info.compareToIgnoreCase(i) < 0)
-                n_w_i = n_w_i.r;
+        while(p!=null && p.info!=i) {
+            prev = p;
+            if(p.info < i)
+                p = p.r;
             else
-                n_w_i = n_w_i.l;
+                p = p.l;
         }
-       
-        //If all we're doing is removing 1 count of 1.
-        if(n_w_i != null){
-            n_w_i.count--;
-            this.how_many--;
-        }
-        
-        //Otherwise we have to remove the whole node
-        if(n_w_i != null && n_w_i.count == 0) {
-            btNode q = n_w_i;
-            if(n_w_i.r == null)
-                q = n_w_i.l;
-            else if(n_w_i.l==null)
-                q = n_w_i.r;
+
+        if(p!=null) {
+            btNode q = p;
+            if(p.r==null)
+                q = p.l;
+            else if(p.l==null)
+                q = p.r;
             else {
-                btNode j = n_w_i.l;
+                btNode j = p.l;
                 if(j.r==null) {
                     q = j;
-                    q.r = n_w_i.r;
+                    q.r = p.r;
                 } else {
                     while(j.r.r!=null)
                         j = j.r;
                     q = j.r;
                     j.r = q.l;
-                    q.r = n_w_i.r;
-                    q.l = n_w_i.l;
+                    q.r = p.r;
+                    q.l = p.l;
                 }
             }
 
-            if(prev == null)
+            if(prev==null)
                 c = q;
-            else if(prev.r == n_w_i)
+            else if(prev.r==p)
                 prev.r = q;
             else
                 prev.l = q;
@@ -170,14 +144,14 @@ public class MultistringColl {
         btprint(c);
     }
 
-    // returns true if both Stringcoll instances contain
+    // returns true if both Intcoll instances contain
     //   identical int collections
-    public boolean equals(MultistringColl obj)
+    public boolean equals(Intcoll obj)
     {
         if(how_many != obj.how_many)
             return false;
-        String a1[] = new String[how_many];
-        String a2[] = new String[how_many];
+        int a1[] = new int[how_many];
+        int a2[] = new int[how_many];
         int i=0;
         btToArray(c, a1, i);
         i=0;
@@ -185,7 +159,7 @@ public class MultistringColl {
 
         boolean ret = true;
         for(i=0; ret && i<how_many; i++)
-            ret = (a1[i].equals(a2[i]));
+            ret = (a1[i] == a2[i]);
 
         return ret;
     }
@@ -197,7 +171,7 @@ public class MultistringColl {
         return new btNode(b.info, btclone(b.l), btclone(b.r));
     }
 
-    private static int btToArray(btNode b, String[] a, int i) {
+    private static int btToArray(btNode b, int[] a, int i) {
         if(b!=null) {
             i = btToArray(b.l, a, i);
             a[i++] = b.info; // i++ returns i before it adds 1, so a[i] == a[i++] != a[++i]
@@ -209,8 +183,9 @@ public class MultistringColl {
     private static void btprint(btNode b) {
         if(b==null)
             return;
+        System.out.printf("%d; lt: %d, rt: %d\n", b.info, (b.l != null) ? b.l.info : -1, (b.r != null) ? b.r.info : -1);
         btprint(b.l);
-        System.out.printf("%s (%d):: L: %s, R: %s\n", b.info, b.count, (b.l != null) ? b.l.info : "NULL", (b.r != null) ? b.r.info : "NULL");
         btprint(b.r);
     }
 }
+

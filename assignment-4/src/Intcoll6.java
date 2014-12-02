@@ -1,4 +1,4 @@
-//***********************************************************************
+ //***********************************************************************
 // FILE NAME    : Intcoll6.java
 // DESCRIPTION  : This file contains the class Intcoll6.
 // NAME: Sam Couch - couch@temple.edu
