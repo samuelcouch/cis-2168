@@ -16,7 +16,6 @@ public class YourMazeWithPath2
        //Keep track of where we've visited
        visited = new boolean[R][C]; //Initializes to false by default
        LinkedList<Point> Path = new LinkedList<Point>();
-       //Start at (1,1) to simplify our DFS logic
        CreatePath(maze, 1, 1, R, C, Path);
        maze.showPath(Path);
     }
@@ -25,8 +24,11 @@ public class YourMazeWithPath2
     // and ending at cell (erow and ecol),  in L
     public boolean CreatePath(InputGraphicMaze2 maze,      
       int srow, int scol, int erow, int ecol, LinkedList<Point> L){
-        //So we can follow the console log through the search path
+        //So we can follow the DFS path
         System.out.printf("srow = %d scol = %d erow = %d ecol = %d\n", srow, scol, erow, ecol);
+        
+        //mark current as visited;
+        //visit all of current's unvisited neighbors by calling CreatePath(neighbors)
         
         //Push the point we're at onto the stack
         L.push(new Point(srow, scol));
