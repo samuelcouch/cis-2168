@@ -60,7 +60,8 @@ public class InputGraphicMaze7 extends JFrame
     }
 
     public void showPath(LinkedList<Point> P) {
-        mazepanel.Path=P; repaint();
+        mazepanel.Path=P; 
+        repaint();
     }
 
     private class Mazepanel extends JPanel 
